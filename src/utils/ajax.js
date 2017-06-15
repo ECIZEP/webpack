@@ -1,7 +1,7 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'http://xxx.com/xxx';
 
-//统一处理结果
+// 统一处理结果
 axios.interceptors.response.use(function (response) {
   return response.data;
 }, function (error) {

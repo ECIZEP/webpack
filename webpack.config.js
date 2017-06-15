@@ -50,9 +50,10 @@ module.exports = {
     },
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
-        use: ["eslint-loader"],
+        use: ["babel-loader", "eslint-loader"],
         exclude: /node_modules/,
         enforce: 'pre'
       },
@@ -68,6 +69,18 @@ module.exports = {
         ],
         exclude: /node_modules/,
         enforce: 'pre'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          }, "postcss-loader"
+        ]
       },
       {
         test: /\.(png|jpg|gif|md)$/,
@@ -92,18 +105,6 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: ['url-loader?limit=10240&mimetype=image/svg+xml']
-      },
-      {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          }, "postcss-loader"
-        ]
       }
     ]
   },

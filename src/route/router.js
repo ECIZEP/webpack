@@ -9,7 +9,6 @@ const Detail = resolve => {
   }, 'detail')
 }
 
-
 export default [{
     name: 'index',
     path: '/',

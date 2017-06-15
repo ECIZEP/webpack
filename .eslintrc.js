@@ -34,11 +34,12 @@ module.exports = {
     "operator-linebreak": 0,
     'handle-callback-err': 0,
     "comma-spacing": 0,
-    "one-var": 1,
+    "one-var": 0,
     "padded-blocks": 0,
     "no-multiple-empty-lines": 0,
     "no-trailing-spaces": 1,
     "no-irregular-whitespace": 1,
-    "no-throw-literal": 1
+    "no-throw-literal": 0,
+    "prefer-promise-reject-errors": 0
   }
 }
