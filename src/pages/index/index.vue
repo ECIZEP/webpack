@@ -30,7 +30,4 @@
 <style scoped>
   @import '../../assets/css/suit.css';
   @import "./index.css";
-  .vueflex {
-    display: flex;
-  }
 </style>
