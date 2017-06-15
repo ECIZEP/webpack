@@ -1,9 +1,11 @@
 <template>
-    <div>im detail page</div>
+  <div>im detail page</div>
 </template>
 
-<script></script>
-    
-<style lang="less" scoped>
-    @import "./detail";
+<script>
+  export default {
+  }
+</script>
+
+<style scoped>
 </style>
