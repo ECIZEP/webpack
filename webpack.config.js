@@ -41,7 +41,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.css', '.less'],
     modules: [
-      path.resolve(__dirname, './src'), 'node_modules'
+      'node_modules'
     ],
     alias: {
       Components: path.resolve(__dirname, 'src/components'),
@@ -50,11 +50,10 @@ module.exports = {
     },
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         use: ["babel-loader", "eslint-loader"],
-        exclude: /node_modules/,
+        exclude: ['/node_modules/', '/dist'],
         enforce: 'pre'
       },
       {
@@ -67,7 +66,7 @@ module.exports = {
           },
           "eslint-loader"
         ],
-        exclude: /node_modules/,
+        exclude: ['/node_modules/', '/dist'],
         enforce: 'pre'
       },
       {
