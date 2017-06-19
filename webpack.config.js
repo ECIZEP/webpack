@@ -50,10 +50,11 @@ module.exports = {
     },
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         use: ["babel-loader", "eslint-loader"],
-        exclude: ['/node_modules/', '/dist'],
+        exclude: /node_modules/,
         enforce: 'pre'
       },
       {
@@ -66,19 +67,21 @@ module.exports = {
           },
           "eslint-loader"
         ],
-        exclude: ['/node_modules/', '/dist'],
+        exclude: /node_modules/,
         enforce: 'pre'
       },
       {
-        test: /\.css$/,
+        test: /\.(less|css)$/,
         use: [
           "style-loader",
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1
+              importLoaders: 2
             }
-          }, "postcss-loader"
+          }, 
+          "postcss-loader",
+          "less-loader"
         ]
       },
       {

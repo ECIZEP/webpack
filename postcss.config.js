@@ -5,7 +5,7 @@ module.exports = {
     // cssnext contains autoprefixer
     // browser option
     'postcss-cssnext': {
-      browsers: [
+      'browsers': [
         'iOS >= 8',
         'Chrome >= 45',
         'Android >= 4',

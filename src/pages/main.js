@@ -4,21 +4,23 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import routes from '../route/router.js'
 import Filter from '../utils/filter.js'
-import '../assets/css/base.css'
+import '../assets/style/base.less'
+import '../assets/style/mixin.less'
+
 
 Vue.use(axios);
 Vue.use(VueRouter);
 
-Object.keys(Filter).forEach(function(k) {
-	Vue.filter(k, Filter[k]);
+Object.keys(Filter).forEach(function (k) {
+  Vue.filter(k, Filter[k]);
 });
 
 const router = new VueRouter({
-	// mode: 'history',
-	routes
+  // mode: 'history',
+  routes
 });
 
 new Vue({
-	router,
-  	render: h => h(App)
+  router,
+  render: h => h(App)
 }).$mount('app')
