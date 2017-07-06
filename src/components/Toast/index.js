@@ -1,47 +1,67 @@
-import Vue from 'vue';
+import ToastComponent from './toast.vue'
+const mergeOptions = function ($vm, options) {
+  const defaults = {}
+  for (let i in $vm.$options.props) {
+    defaults[i] = $vm.$options.props[i].default
+  }
 
-const ToastConstructor = Vue.extend(require('./toast.vue'));
-let toastPool = [];
+  const _options = Object.assign({}, defaults, options)
+  for (let i in _options) {
+    $vm[i] = _options[i]
+  }
+}
 
-let getAnInstance = () => {
-    if (toastPool.length > 0) {
-        let instance = toastPool[0];
-        toastPool.splice(0, 1);
-        return instance;
-    }
-    return new ToastConstructor({
+let $vm
+let timer
+const plugin = {
+  install(vue, options = {}) {
+    const Toast = vue.extend(ToastComponent)
+
+    if (!$vm) {
+      $vm = new Toast({
         el: document.createElement('div')
-    });
-};
-
-let removeDom = event => {
-    if (event.target.parentNode) {
-        event.target.parentNode.removeChild(event.target);
+      })
+      document.body.appendChild($vm.$el)
     }
-};
+    const toast = (options) => {
+      if (typeof options === 'string') {
+        mergeOptions($vm, {
+          text: options
+        });
+      } else if (typeof options === 'object') {
+        mergeOptions($vm, options)
+      }
+      if (typeof options === 'object' && (options.onShow || options.onHide)) {
+        options.onShow && options.onShow();
+      }
+      this.$watcher && this.$watcher();
+      this.$watcher = $vm.$watch('show', (val) => {
+        if (!val && options && options.onHide) {
+          options.onHide();
+        }
+      })
+      $vm.show = true;
 
-ToastConstructor.prototype.close = function () {
-    this.visible = false;
-    this.$el.addEventListener('transitionend', removeDom);
-};
+      if (options.time !== 0) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          $vm.show = false;
+        }, options.time || 1500)
+      }
+    }
+    toast.hide = () => {
+      $vm.show = false;
+    }
 
-let Toast = (options = {}) => {
-    let duration = options.duration || 1500;
-    let instance = getAnInstance();
-    clearTimeout(instance.timer);
-    instance.show = options.show || true;
-    instance.className = options.className || '';
-    instance.message = typeof options === 'string' ? options : options.message;
+    vue.$toast = toast
 
-    document.body.appendChild(instance.$el);
-    Vue.nextTick(function () {
-        instance.visible = true;
-        instance.$el.removeEventListener('transitionend', removeDom);
-        instance.timer = setTimeout(function () {
-            instance.close();
-        }, duration);
-    });
-    return instance;
-};
+    vue.mixin({
+      created: function () {
+        this.$toast = vue.$toast;
+      }
+    })
+  }
+}
 
-export default Toast;
+export default plugin
+export const install = plugin.install

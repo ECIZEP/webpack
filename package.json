@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "a vue.js project created by vfly",
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --colors --hot --devtool eval-source-map",
+    "start": "webpack-dev-server --open --hot --inline --progress --colors --devtool eval-source-map",
     "dev": "webpack --config webpack.dev.config.js",
     "pre": "webpack --config webpack.pre.config.js",
     "build": "webpack --config webpack.prod.config.js"

@@ -9,7 +9,7 @@ module.exports = {
         'iOS >= 8',
         'Chrome >= 45',
         'Android >= 4',
-        'IE > 9'
+        'IE > 10'
       ]
     },
     'postcss-bem': {

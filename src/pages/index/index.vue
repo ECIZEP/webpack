@@ -105,7 +105,7 @@
   }
 </script>
 <style lang="less" scoped>
-  @import '../../assets/style/mixin.less';
+  @import '../../assets/css/mixin.less';
   .vfly-table {
     background-color: #FFFFFF;
     .border-bottom-1px(#e3e5e9);

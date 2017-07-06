@@ -4,12 +4,12 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import routes from '../route/router.js'
 import Filter from '../utils/filter.js'
-import '../assets/style/base.less'
-import '../assets/style/mixin.less'
-
+import toast from '../components/Toast/index.js'
+import '../assets/css/base.less'
 
 Vue.use(axios);
 Vue.use(VueRouter);
+Vue.use(toast);
 
 Object.keys(Filter).forEach(function (k) {
   Vue.filter(k, Filter[k]);

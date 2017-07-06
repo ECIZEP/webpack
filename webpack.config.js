@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   entry: {
     build: './src/pages/main.js',
-    vendor: ['vue', 'axios', 'vue-router', 'js-cookie', 'store']
+    vendor: ['vue', 'axios', 'vue-router']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -111,6 +111,9 @@ module.exports = {
     ]
   },
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    hot: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   }
 };
